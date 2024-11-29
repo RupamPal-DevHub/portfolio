@@ -10,7 +10,7 @@ export default function Custom404() {
       <div className="flex flex-col items-center">
         <h1 className="font-bold text-9xl">404</h1>
         <p className="font-bold">
-          Oops! The page you're looking for doesn't exist.
+          Oops! The page you&apos;re looking for doesn&apos;t exist.
         </p>
         <Link
           href="/"
@@ -22,7 +22,7 @@ export default function Custom404() {
           src={notFoundLogo}
           alt="Description of the image"
           height={500}
-          className=" object-fit   customshadow "
+          className="object-fit customshadow"
         />
       </div>
     </div>
