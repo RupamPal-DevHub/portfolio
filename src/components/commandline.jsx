@@ -15,10 +15,10 @@ const Commandline = () => {
         className="w-full md:w-[50%] h-40 md:h-60 overflow-hidden object-cover object-bottom"
       />
       <p className="border border-dashed p-2 my-2 w-full md:w-[50%]">
-        🚧 Whoa, you're early! 🚧 <br />
+        🚧 Whoa, you&apos;re early! 🚧 <br />
         + This site is still under construction. <br />
         + Grab a coffee and check back soon for the full experience! <br />+ In
-        the meantime, feel free to explore what's already <br />
+        the meantime, feel free to explore what&apos;s already <br />
         /----------------- # -----------------/ <br />
         type <span className="underline">--help</span> for more info.{" "}
       </p>
