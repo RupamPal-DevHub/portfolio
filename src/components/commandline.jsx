@@ -1,15 +1,34 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import pro1 from "../../public/mario.gif";
 
 const Commandline = () => {
   const router = useRouter();
 
+  const contruction = [
+    <div key="error" className="font-bold mb-2">
+      <Image
+        src={pro1}
+        alt="Description of the image"
+        className="w-full md:w-[50%] h-40 md:h-60 overflow-hidden object-cover object-bottom"
+      />
+      <p className="border border-dashed p-2 my-2 w-full md:w-[50%]">
+        🚧 Whoa, you're early! 🚧 <br />
+        + This site is still under construction. <br />
+        + Grab a coffee and check back soon for the full experience! <br />+ In
+        the meantime, feel free to explore what's already <br />
+        /----------------- # -----------------/ <br />
+        type <span className="underline">--help</span> for more info.{" "}
+      </p>
+    </div>,
+  ];
+
   const [formData, setFormData] = useState("");
-  const [ins, setIns] = useState([]);
+  const [ins, setIns] = useState([contruction]);
   const [weather, setWeather] = useState(null);
 
-  // Fetch weather data
   useEffect(() => {
     const fetchWeather = async () => {
       const data = await fetch("https://wttr.in/Kolkata?format=j1");
@@ -28,16 +47,17 @@ const Commandline = () => {
           {formData}
         </span>
       </p>
-
       <p className="text-orange-400">Available commands-</p>
-      <p>./portfolio</p>
-      <p>./contact</p>
-      <p>./downloadcv</p>
-      <p>ls</p>
-      <p>clear</p>
-      <p>cd projects</p>
-      <p>./time</p>
-      <p>./weather</p>
+      <div className="flex flex-wrap gap-x-6 gap-y-1">
+        <p>./portfolio</p>
+        <p>./contact</p>
+        <p>./downloadcv</p>
+        <p>ls</p>
+        <p>clear</p>
+        <p>cd projects</p>
+        <p>./time</p>
+        <p>./weather</p>
+      </div>
     </div>,
   ];
 
@@ -85,7 +105,7 @@ const Commandline = () => {
     if (e.key === "Enter") {
       e.preventDefault();
 
-      if (e.target.value === "--help") {
+      if (e.target.value === "--help" || e.target.value === "-h") {
         setIns((prevIns) => [...prevIns, helpmessage]);
       } else if (e.target.value === "clear") {
         setIns([]);
