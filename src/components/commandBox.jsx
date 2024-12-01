@@ -31,9 +31,7 @@ const Commandbox = () => {
       <div className="w-[95%] sm:w-[90%] h-[95%] sm:h-[90%] md:h-[90%] bg-black rounded-2xl bg-opacity-10 backdrop-blur-xl border border-bordercolor">
         <Topbar title={"Terminal"} />
         <div className="h-[95%] p-4 md:p-6">
-          <div className="overflow-y-auto hide-scrollbar w-full h-full">
-            <Commandline />
-          </div>
+          <Commandline />
         </div>
       </div>
     </div>
