@@ -175,7 +175,7 @@ const Commandline = () => {
         <span className="text-white font-normal ">{formData}</span>
       </p>
       <p>
-        I'm Rupam Pal, a 21-year-old software developer from Santragachi,
+        I&apos;m Rupam Pal, a 21-year-old software developer from Santragachi,
         Howrah, with a passion for building impactful digital solutions. I hold
         a BSc in IT with a specialization in Cyber Security from MAKAUT, where I
         developed a strong foundation in penetration testing, network testing,
@@ -185,7 +185,7 @@ const Commandline = () => {
         dynamic UI designs with React and Tailwind CSS, and implementing
         responsive, user-friendly applications. Beyond coding, I enjoy exploring
         creative pursuits like cooking, listening to music, and designing
-        innovative web applications. I'm always eager to learn and grow,
+        innovative web applications. I&apos;m always eager to learn and grow,
         continuously refining my skills to tackle new challenges. Whether it’s
         collaborating with teams or working independently, I aim to deliver
         high-quality, efficient solutions that leave a positive impact.
