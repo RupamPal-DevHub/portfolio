@@ -3,6 +3,19 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import pro1 from "../../public/mario.gif";
+import AboutMe from "./messages/aboutMe";
+import ClasscompassTxt from "./messages/classcompassTxt";
+import DownloadCv from "./messages/downloadCv";
+import FolderChange from "./messages/folderChange";
+import HelpMessage from "./messages/helpMessage";
+import IotTxt from "./messages/iotTxt";
+import ProjectsFiles from "./messages/projectsFiles";
+import Readme from "./messages/readme";
+import RootFiles from "./messages/rootFiles";
+import TerminalTxt from "./messages/terminalTxt";
+import TerminalVersion from "./messages/terminalVersion";
+import WeatherMessage from "./messages/weatherMessage";
+import ErrorMessage from "./messages/errorMessage";
 
 const Commandline = () => {
   const outputRef = useRef(null);
@@ -23,13 +36,13 @@ const Commandline = () => {
         <br />
         ----------------------------------------------------
         <br />+ type <span className="underline">--help</span> for more info.{" "}
-        <br />+ for portfolio click or type 👉 ./
+        <br />+ for portfolio click or type 👉./
         <span
           className="underline hover:text-green-400 cursor-pointer"
           onClick={() => router.push("/portfolio")}
         >
           portfolio
-        </span>{" "}
+        </span>
         👈
       </p>
     </div>,
@@ -56,264 +69,230 @@ const Commandline = () => {
     fetchWeather();
   }, []);
 
-  const helpmessage = [
-    <div key="help" className="font-bold mb-2 text-sm md:text-sm lg:text-lg">
-      <p className="text-green-400 font-bold">
-        rupam@terminal : ~${"  "} &nbsp;{curFol}
-        <span className="text-white font-normal">{formData}</span>
-      </p>
-      <p className="text-orange-400">Available commands-</p>
-      <div className="flex flex-wrap gap-x-6 gap-y-1">
-        <p>./portfolio</p>
-        <p>./contact</p>
-        <p>./about -gui</p>
-        <p>wget cv</p>
-        <p>ls</p>
-        <p>cd</p>
-        <p>clear</p>
-        <p>./time</p>
-        <p>./weather</p>
-        <p>./feedback</p>
-      </div>
-      <p className="p-2 mt-2 border border-dashed">
-        + Use 🐾 cat to read files! <br />+ For more commands and detailed info,
-        check out 📘{" "}
-        <span className="cursor-pointer underline hover:text-green-400">
-          readme.md
-        </span>
-        !
-      </p>
-    </div>,
-  ];
-
-  const error = [
-    <div key="error" className="font-bold mb-2 text-sm md:text-sm lg:text-lg">
-      <p className="text-green-400">
-        rupam@terminal :&nbsp;~{curFol}&nbsp;
-        <span className="text-white">$</span> &nbsp;
-        <span className="text-white font-normal">{formData}</span>
-      </p>
-      <p className="text-red-600">Error - `{formData}` command not found</p>
-      <p>type --help for more info.</p>
-    </div>,
-  ];
-
-  const terminalVersion = [
-    <div key="error" className="mb-2 font-bold text-sm md:text-sm lg:text-lg">
-      <p className="text-green-400">
-        rupam@terminal :&nbsp;~{curFol}&nbsp;
-        <span className="text-white">$</span> &nbsp;
-        <span className="text-white font-normal">{formData}</span>
-      </p>
-      <p>1.02</p>
-      <p>last updated on - 01/11/24</p>
-    </div>,
-  ];
-
-  const readme = [
-    <div key="help" className="font-bold mb-2 text-sm md:text-sm lg:text-lg">
-      <p className="text-green-400 font-bold">
-        rupam@terminal :&nbsp;~{curFol}&nbsp;
-        <span className="text-white">$</span> &nbsp;
-        <span className="text-white font-normal">{formData}</span>
-      </p>
-      +++++++++++++++++++++++++++++
-      <p>+📘 Command Documentation 📘+</p>
-      +++++++++++++++++++++++++++++
-      <br />
-      <p>1. cd</p>
-      <p>Description: Changes the directory.</p>
-      <p>Example Usage:</p>
-      <p>cd projects</p>
-      ----------------------------------------------------
-      <p>2. cd ..</p>
-      <p>Description: Goes one level up in the directory hierarchy.</p>
-      <p>Example Usage:</p>
-      <p>cd ..</p>
-      ----------------------------------------------------
-      <p>3. ls</p>
-      <p>Description: Lists all files and folders in the current directory.</p>
-      <p>Example Usage:</p>
-      <p>ls</p>
-      ----------------------------------------------------
-      <p>4. cat</p>
-      <p>Description: Displays the content of a file.</p>
-      <p>Example Usage:</p>
-      <p>cat readme.md</p>
-      ----------------------------------------------------
-      <p>5. clear</p>
-      <p>Description: Clears the terminal output.</p>
-      <p>Example Usage:</p>
-      <p>clear</p>
-      ----------------------------------------------------
-      <p>6. ./weather</p>
-      <p>Description: Displays the current weather in your region (Kolkata).</p>
-      <p>Example Usage:</p>
-      <p>./weather</p>
-      ----------------------------------------------------
-      <p>7. ./portfolio</p>
-      <p>Description: Redirects to the portfolio page.</p>
-      <p>Example Usage:</p>
-      <p>./portfolio</p>
-      ----------------------------------------------------
-      <p>8. ./contact</p>
-      <p>Description: Redirects to the contact page.</p>
-      <p>Example Usage:</p>
-      <p>./contact</p>
-      ----------------------------------------------------
-      <p>9. terminal -v</p>
-      <p>Description: Displays the current version of the terminal.</p>
-      <p>Example Usage:</p>
-      <p>terminal -v</p>
-    </div>,
-  ];
-
-  const about = [
-    <div key="error" className="font-bold mb-2 text-sm md:text-sm lg:text-lg">
-      <p className="text-green-400">
-        rupam@terminal : ~&nbsp;<span className="text-white">$</span> &nbsp;
-        <span className="text-white font-normal ">{formData}</span>
-      </p>
-      <p>
-        I&apos;m Rupam Pal, a 21-year-old software developer from Santragachi,
-        Howrah, with a passion for building impactful digital solutions. I hold
-        a BSc in IT with a specialization in Cyber Security from MAKAUT, where I
-        developed a strong foundation in penetration testing, network testing,
-        and software development. My technical expertise spans full-stack web
-        development using the MERN stack, Next.js, and TypeScript. I have
-        hands-on experience building robust authentication systems, creating
-        dynamic UI designs with React and Tailwind CSS, and implementing
-        responsive, user-friendly applications. Beyond coding, I enjoy exploring
-        creative pursuits like cooking, listening to music, and designing
-        innovative web applications. I&apos;m always eager to learn and grow,
-        continuously refining my skills to tackle new challenges. Whether it’s
-        collaborating with teams or working independently, I aim to deliver
-        high-quality, efficient solutions that leave a positive impact.
-      </p>
-    </div>,
-  ];
-
-  const files = [
-    <div key="help" className="font-bold mb-2 text-sm md:text-sm lg:text-lg">
-      <p className="text-green-400">
-        rupam@terminal : ~${"  "} &nbsp;
-        <span className="text-white font-normal ">{formData}</span>
-      </p>
-      <p className="text-orange-400">Available Files and Folders-</p>
-      <div className="flex flex-wrap gap-x-6 gap-y-1">
-        <p>about.txt</p>
-        <p>readme.md</p>
-        <p className="text-blue-500">projects</p>
-      </div>
-    </div>,
-  ];
-  const folderchange = [
-    <div key="help" className="font-bold text-sm md:text-sm lg:text-lg">
-      <p className="text-green-400">
-        rupam@terminal : ~{curFol}&nbsp;
-        <span className="text-white">$</span>
-        {"  "} &nbsp;
-        <span className="text-white font-normal ">{formData}</span>
-      </p>
-    </div>,
-  ];
-  const projectsfiles = [
-    <div key="help" className="font-bold mb-2 text-sm md:text-sm lg:text-lg">
-      <p className="text-green-400">
-        rupam@terminal :&nbsp;~{curFol}&nbsp;
-        <span className="text-white">$</span> &nbsp;
-        <span className="text-white font-normal ">{formData}</span>
-      </p>
-      <p className="text-orange-400">Available Files and Folders-</p>
-      <div className="flex flex-wrap gap-x-6 gap-y-1">
-        <p>classcompass.txt</p>
-        <p>iot.txt</p>
-        <p>terminal.txt</p>
-      </div>
-    </div>,
-  ];
-
   function changeFormData(e) {
     setFormData(e.target.value);
   }
 
-  const weatherMessage = weather ? (
-    <div
-      key={weather.current_condition[0].temp_C}
-      className="font-bold mb-2 text-sm md:text-sm lg:text-lg"
-    >
-      <p className="text-green-400">
-        rupam@terminal :&nbsp;~{curFol}&nbsp;
-        <span className="text-white">$</span> &nbsp;
-        <span className="text-white font-normal ">{formData}</span>
-      </p>
-      <p>
-        Weather in Kolkata: {weather.current_condition[0].weatherDesc[0].value}
-        <br />
-        Temperature: {weather.current_condition[0].temp_C}°C
-        <br />
-        Wind Speed: {weather.current_condition[0].windspeedKmph} km/h
-        <br />
-        Humidity: {weather.current_condition[0].humidity}%
-      </p>
-    </div>
-  ) : null;
+  const downloadCV = () => {
+    const link = document.createElement("a"); // Create a temporary <a> element
+    link.href = "/CV_RupamPal.pdf"; // Path to your CV file
+    link.download = "RupamPal.pdf"; // Suggested file name
+    link.click(); // Programmatically trigger a click
+  };
 
   const submitCommand = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
 
       if (e.target.value === "--help" || e.target.value === "-h") {
-        setIns((prevIns) => [...prevIns, helpmessage]);
+        setIns((prevIns) => [
+          ...prevIns,
+          <HelpMessage curFol={curFol} formData={formData} key={HelpMessage} />,
+        ]);
       } else if (e.target.value === "clear") {
         setIns([]);
       } else if (e.target.value === "./weather" && weather) {
-        setIns((prevIns) => [...prevIns, weatherMessage]);
+        setIns((prevIns) => [
+          ...prevIns,
+          <WeatherMessage
+            curFol={curFol}
+            formData={formData}
+            weather={weather}
+            key={WeatherMessage}
+          />,
+        ]);
       } else if (e.target.value === "./portfolio") {
         router.push("/portfolio");
       } else if (e.target.value === "./contact") {
         router.push("/contact");
       } else if (e.target.value === "cat about.txt") {
         if (curFol == "") {
-          setIns((prevIns) => [...prevIns, about]);
+          setIns((prevIns) => [
+            ...prevIns,
+            <AboutMe formData={formData} key={AboutMe} />,
+          ]);
           setFormData("");
         } else {
-          setIns((prevIns) => [...prevIns, error]);
+          setIns((prevIns) => [
+            ...prevIns,
+            <ErrorMessage
+              curFol={curFol}
+              formData={formData}
+              key={ErrorMessage}
+            />,
+          ]);
           setFormData("");
         }
       } else if (e.target.value === "ls") {
         if (curFol == "") {
-          setIns((prevIns) => [...prevIns, files]);
+          setIns((prevIns) => [
+            ...prevIns,
+            <RootFiles formData={formData} key={RootFiles} />,
+          ]);
           setFormData("");
         } else if (curFol == "/projects") {
-          setIns((prevIns) => [...prevIns, projectsfiles]);
+          setIns((prevIns) => [
+            ...prevIns,
+            <ProjectsFiles
+              curFol={curFol}
+              formData={formData}
+              key={ProjectsFiles}
+            />,
+          ]);
           setFormData("");
         }
       } else if (e.target.value === "cat readme.md") {
-        setIns((prevIns) => [...prevIns, readme]);
+        if (curFol == "") {
+          setIns((prevIns) => [
+            ...prevIns,
+            <Readme curFol={curFol} formData={formData} key={Readme} />,
+          ]);
+        } else {
+          setIns((prevIns) => [
+            ...prevIns,
+            <ErrorMessage
+              curFol={curFol}
+              formData={formData}
+              key={ErrorMessage}
+            />,
+          ]);
+          setFormData("");
+        }
+
         setFormData("");
       } else if (e.target.value === "cd projects") {
         if (curFol == "") {
           setCurFol("/projects");
-          setIns((prevIns) => [...prevIns, folderchange]);
+          setIns((prevIns) => [
+            ...prevIns,
+            <FolderChange
+              curFol={curFol}
+              formData={formData}
+              key={FolderChange}
+            />,
+          ]);
           setFormData("");
         } else {
-          setIns((prevIns) => [...prevIns, error]);
+          setIns((prevIns) => [
+            ...prevIns,
+            <ErrorMessage
+              curFol={curFol}
+              formData={formData}
+              key={ErrorMessage}
+            />,
+          ]);
           setFormData("");
         }
       } else if (e.target.value === "cd ..") {
         if (curFol == "/projects") {
-          setIns((prevIns) => [...prevIns, folderchange]);
+          setIns((prevIns) => [
+            ...prevIns,
+            <FolderChange
+              curFol={curFol}
+              formData={formData}
+              key={FolderChange}
+            />,
+          ]);
           setCurFol("");
           setFormData("");
         } else {
-          setIns((prevIns) => [...prevIns, error]);
+          setIns((prevIns) => [
+            ...prevIns,
+            <ErrorMessage
+              curFol={curFol}
+              formData={formData}
+              key={ErrorMessage}
+            />,
+          ]);
+          setFormData("");
+        }
+      } else if (e.target.value === "cat classcompass.txt") {
+        if (curFol == "/projects") {
+          setIns((prevIns) => [
+            ...prevIns,
+            <ClasscompassTxt
+              curFol={curFol}
+              formData={formData}
+              key={ClasscompassTxt}
+            />,
+          ]);
+          setFormData("");
+        } else {
+          setIns((prevIns) => [
+            ...prevIns,
+            <ErrorMessage
+              curFol={curFol}
+              formData={formData}
+              key={ErrorMessage}
+            />,
+          ]);
+          setFormData("");
+        }
+      } else if (e.target.value === "cat iot.txt") {
+        if (curFol == "/projects") {
+          setIns((prevIns) => [
+            ...prevIns,
+            <IotTxt curFol={curFol} formData={formData} key={IotTxt} />,
+          ]);
+          setFormData("");
+        } else {
+          setIns((prevIns) => [
+            ...prevIns,
+            <ErrorMessage
+              curFol={curFol}
+              formData={formData}
+              key={ErrorMessage}
+            />,
+          ]);
           setFormData("");
         }
       } else if (e.target.value === "terminal -v") {
-        setIns((prevIns) => [...prevIns, terminalVersion]);
+        setIns((prevIns) => [
+          ...prevIns,
+          <TerminalVersion
+            curFol={curFol}
+            formData={formData}
+            key={TerminalVersion}
+          />,
+        ]);
+      } else if (e.target.value === "cat terminal.txt") {
+        if (curFol == "/projects") {
+          setIns((prevIns) => [
+            ...prevIns,
+            <TerminalTxt
+              curFol={curFol}
+              formData={formData}
+              key={TerminalTxt}
+            />,
+          ]);
+          setFormData("");
+        } else {
+          setIns((prevIns) => [
+            ...prevIns,
+            <ErrorMessage
+              curFol={curFol}
+              formData={formData}
+              key={ErrorMessage}
+            />,
+          ]);
+          setFormData("");
+        }
+      } else if (e.target.value === "wget cv") {
+        setIns((prevIns) => [
+          ...prevIns,
+          <DownloadCv curFol={curFol} formData={formData} key={DownloadCv} />,
+        ]);
+        downloadCV();
+        setFormData("");
       } else {
-        setIns((prevIns) => [...prevIns, error]);
+        setIns((prevIns) => [
+          ...prevIns,
+          <ErrorMessage
+            curFol={curFol}
+            formData={formData}
+            key={ErrorMessage}
+          />,
+        ]);
         setFormData("");
       }
       e.target.value = "";
@@ -329,7 +308,7 @@ const Commandline = () => {
       {ins}
 
       <div className="flex">
-        <p className="text-green-400 font-bold text-sm md:text-sm lg:text-lg">
+        <p className="text-green-400 font-bold text-sm md:text-sm lg:text-base">
           rupam@terminal : ~{curFol} <span className="text-white">$</span>
         </p>
         <input
@@ -337,7 +316,7 @@ const Commandline = () => {
           autoFocus
           onChange={(e) => changeFormData(e)}
           onKeyDown={submitCommand}
-          className="mx-2 bg-transparent text-sm md:text-sm lg:text-lg w-28 md:w-96 focus:outline-none"
+          className="mx-2 bg-transparent text-sm md:text-sm lg:text-base w-28 md:w-96 focus:outline-none"
         />
       </div>
     </div>
