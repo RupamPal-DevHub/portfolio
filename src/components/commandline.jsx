@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import pro1 from "../../public/mario.gif";
+import downloadCV from "@/logic/downloadCv";
+import Mario from "./messages/mario";
 import AboutMe from "./messages/aboutMe";
 import ClasscompassTxt from "./messages/classcompassTxt";
 import DownloadCv from "./messages/downloadCv";
@@ -21,35 +23,8 @@ const Commandline = () => {
   const outputRef = useRef(null);
   const router = useRouter();
 
-  const contruction = [
-    <div key="error" className="font-bold mb-2">
-      <Image
-        src={pro1}
-        alt="Description of the image"
-        className="w-full md:w-[50%] h-40 md:h-60 overflow-hidden object-cover object-bottom"
-      />
-      <p className="border border-dashed p-2 my-2 w-full md:w-[50%] text-sm md:text-sm lg:text-base">
-        🚧 Whoa, you&apos;re early! 🚧 <br />
-        + This site is still under construction. <br />
-        + Grab a coffee and check back soon for the full experience! <br />+ In
-        the meantime, feel free to explore what&apos;s already here.
-        <br />
-        ----------------------------------------------------
-        <br />+ type <span className="underline">--help</span> for more info.{" "}
-        <br />+ for portfolio click or type 👉./
-        <span
-          className="underline hover:text-green-400 cursor-pointer"
-          onClick={() => router.push("/portfolio")}
-        >
-          portfolio
-        </span>
-        👈
-      </p>
-    </div>,
-  ];
-
   const [formData, setFormData] = useState("");
-  const [ins, setIns] = useState([contruction]);
+  const [ins, setIns] = useState([<Mario key={Date.now()} router={router} />]);
   const [curFol, setCurFol] = useState("");
   const [weather, setWeather] = useState(null);
 
@@ -73,21 +48,16 @@ const Commandline = () => {
     setFormData(e.target.value);
   }
 
-  const downloadCV = () => {
-    const link = document.createElement("a"); // Create a temporary <a> element
-    link.href = "/CV_RupamPal.pdf"; // Path to your CV file
-    link.download = "RupamPal.pdf"; // Suggested file name
-    link.click(); // Programmatically trigger a click
-  };
-
   const submitCommand = (e) => {
+    const command = e.target.value.trim();
+    const uniqueKey = `${command}-${Date.now()}`;
     if (e.key === "Enter") {
       e.preventDefault();
 
       if (e.target.value === "--help" || e.target.value === "-h") {
         setIns((prevIns) => [
           ...prevIns,
-          <HelpMessage curFol={curFol} formData={formData} key={HelpMessage} />,
+          <HelpMessage curFol={curFol} formData={formData} key={uniqueKey} />,
         ]);
       } else if (e.target.value === "clear") {
         setIns([]);
@@ -98,7 +68,7 @@ const Commandline = () => {
             curFol={curFol}
             formData={formData}
             weather={weather}
-            key={WeatherMessage}
+            key={uniqueKey}
           />,
         ]);
       } else if (e.target.value === "./portfolio") {
@@ -109,7 +79,7 @@ const Commandline = () => {
         if (curFol == "") {
           setIns((prevIns) => [
             ...prevIns,
-            <AboutMe formData={formData} key={AboutMe} />,
+            <AboutMe formData={formData} key={uniqueKey} />,
           ]);
           setFormData("");
         } else {
@@ -118,7 +88,7 @@ const Commandline = () => {
             <ErrorMessage
               curFol={curFol}
               formData={formData}
-              key={ErrorMessage}
+              key={uniqueKey}
             />,
           ]);
           setFormData("");
@@ -127,7 +97,7 @@ const Commandline = () => {
         if (curFol == "") {
           setIns((prevIns) => [
             ...prevIns,
-            <RootFiles formData={formData} key={RootFiles} />,
+            <RootFiles formData={formData} key={uniqueKey} />,
           ]);
           setFormData("");
         } else if (curFol == "/projects") {
@@ -136,7 +106,7 @@ const Commandline = () => {
             <ProjectsFiles
               curFol={curFol}
               formData={formData}
-              key={ProjectsFiles}
+              key={uniqueKey}
             />,
           ]);
           setFormData("");
@@ -145,7 +115,7 @@ const Commandline = () => {
         if (curFol == "") {
           setIns((prevIns) => [
             ...prevIns,
-            <Readme curFol={curFol} formData={formData} key={Readme} />,
+            <Readme curFol={curFol} formData={formData} key={uniqueKey} />,
           ]);
         } else {
           setIns((prevIns) => [
@@ -153,7 +123,7 @@ const Commandline = () => {
             <ErrorMessage
               curFol={curFol}
               formData={formData}
-              key={ErrorMessage}
+              key={uniqueKey}
             />,
           ]);
           setFormData("");
@@ -168,7 +138,7 @@ const Commandline = () => {
             <FolderChange
               curFol={curFol}
               formData={formData}
-              key={FolderChange}
+              key={uniqueKey}
             />,
           ]);
           setFormData("");
@@ -178,7 +148,7 @@ const Commandline = () => {
             <ErrorMessage
               curFol={curFol}
               formData={formData}
-              key={ErrorMessage}
+              key={uniqueKey}
             />,
           ]);
           setFormData("");
@@ -190,7 +160,7 @@ const Commandline = () => {
             <FolderChange
               curFol={curFol}
               formData={formData}
-              key={FolderChange}
+              key={uniqueKey}
             />,
           ]);
           setCurFol("");
@@ -201,7 +171,7 @@ const Commandline = () => {
             <ErrorMessage
               curFol={curFol}
               formData={formData}
-              key={ErrorMessage}
+              key={uniqueKey}
             />,
           ]);
           setFormData("");
@@ -213,7 +183,7 @@ const Commandline = () => {
             <ClasscompassTxt
               curFol={curFol}
               formData={formData}
-              key={ClasscompassTxt}
+              key={uniqueKey}
             />,
           ]);
           setFormData("");
@@ -223,7 +193,7 @@ const Commandline = () => {
             <ErrorMessage
               curFol={curFol}
               formData={formData}
-              key={ErrorMessage}
+              key={uniqueKey}
             />,
           ]);
           setFormData("");
@@ -232,7 +202,7 @@ const Commandline = () => {
         if (curFol == "/projects") {
           setIns((prevIns) => [
             ...prevIns,
-            <IotTxt curFol={curFol} formData={formData} key={IotTxt} />,
+            <IotTxt curFol={curFol} formData={formData} key={uniqueKey} />,
           ]);
           setFormData("");
         } else {
@@ -241,7 +211,7 @@ const Commandline = () => {
             <ErrorMessage
               curFol={curFol}
               formData={formData}
-              key={ErrorMessage}
+              key={uniqueKey}
             />,
           ]);
           setFormData("");
@@ -252,18 +222,14 @@ const Commandline = () => {
           <TerminalVersion
             curFol={curFol}
             formData={formData}
-            key={TerminalVersion}
+            key={uniqueKey}
           />,
         ]);
       } else if (e.target.value === "cat terminal.txt") {
         if (curFol == "/projects") {
           setIns((prevIns) => [
             ...prevIns,
-            <TerminalTxt
-              curFol={curFol}
-              formData={formData}
-              key={TerminalTxt}
-            />,
+            <TerminalTxt curFol={curFol} formData={formData} key={uniqueKey} />,
           ]);
           setFormData("");
         } else {
@@ -272,7 +238,7 @@ const Commandline = () => {
             <ErrorMessage
               curFol={curFol}
               formData={formData}
-              key={ErrorMessage}
+              key={uniqueKey}
             />,
           ]);
           setFormData("");
@@ -280,18 +246,14 @@ const Commandline = () => {
       } else if (e.target.value === "wget cv") {
         setIns((prevIns) => [
           ...prevIns,
-          <DownloadCv curFol={curFol} formData={formData} key={DownloadCv} />,
+          <DownloadCv curFol={curFol} formData={formData} key={uniqueKey} />,
         ]);
         downloadCV();
         setFormData("");
       } else {
         setIns((prevIns) => [
           ...prevIns,
-          <ErrorMessage
-            curFol={curFol}
-            formData={formData}
-            key={ErrorMessage}
-          />,
+          <ErrorMessage curFol={curFol} formData={formData} key={uniqueKey} />,
         ]);
         setFormData("");
       }

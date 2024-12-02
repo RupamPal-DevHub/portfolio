@@ -12,6 +12,7 @@ const RootFiles = ({ formData }) => {
         <p>about.txt</p>
         <p>readme.md</p>
         <p className="text-blue-500">projects</p>
+        <p className="text-blue-500">themes</p>
       </div>
     </div>
   );

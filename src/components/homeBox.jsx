@@ -11,7 +11,7 @@ import Footer from "./footer";
 const Homebox = () => {
   return (
     <div className="relative flex justify-center items-center h-screen w-screen text-white">
-      <div className="w-[95%] sm:w-[90%] h-[95%] sm:h-[90%] md:h-[90%] bg-black rounded-2xl bg-opacity-10 backdrop-blur-xl border border-bordercolor">
+      <div className="w-[95%] sm:w-[90%] h-[95%] sm:h-[90%] md:h-[90%] bg-black rounded-2xl bg-opacity-80 backdrop-blur-xl border border-bordercolor">
         <Topbar title={"https://rupampal.com/portfolio"} />
         <Navbar curPage={"home"} />
         <div className="h-[90%] ">
