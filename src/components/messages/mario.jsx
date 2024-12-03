@@ -1,13 +1,13 @@
 "use client";
 import Image from "next/image";
 import pro1 from "../../../public/mario.gif";
-import { useRouter } from "next/router";
 
 const Mario = ({ router }) => {
   return (
     <div key="error" className="font-bold mb-2">
       <Image
         src={pro1}
+        unoptimized
         alt="Description of the image"
         className="w-full md:w-[50%] h-40 md:h-60 overflow-hidden object-cover object-bottom"
       />

@@ -12,7 +12,7 @@ const ClasscompassTxt = ({ curFol, formData }) => {
         <br />
         +++++++++++++++++++++++++++++
         <br />
-        Txt Project <br /> +++++++++++++++++++++++++++++ <br />
+        ClassCompass Project <br /> +++++++++++++++++++++++++++++ <br />
         <br />
         *Overview
         <br />

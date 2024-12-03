@@ -1,8 +1,6 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import pro1 from "../../public/mario.gif";
 import downloadCV from "@/logic/downloadCv";
 import Mario from "./messages/mario";
 import AboutMe from "./messages/aboutMe";
@@ -18,10 +16,15 @@ import TerminalTxt from "./messages/terminalTxt";
 import TerminalVersion from "./messages/terminalVersion";
 import WeatherMessage from "./messages/weatherMessage";
 import ErrorMessage from "./messages/errorMessage";
+import ThemeFiles from "./messages/themeFiles";
+import ThemeGuideTxt from "./messages/themeguideTxt";
+import ThemeChange from "./messages/themeChange";
+import { ThemeContext } from "@/app/layout";
 
 const Commandline = () => {
   const outputRef = useRef(null);
   const router = useRouter();
+  const theme = useContext(ThemeContext);
 
   const [formData, setFormData] = useState("");
   const [ins, setIns] = useState([<Mario key={Date.now()} router={router} />]);
@@ -110,6 +113,12 @@ const Commandline = () => {
             />,
           ]);
           setFormData("");
+        } else if (curFol == "/themes") {
+          setIns((prevIns) => [
+            ...prevIns,
+            <ThemeFiles curFol={curFol} formData={formData} key={uniqueKey} />,
+          ]);
+          setFormData("");
         }
       } else if (e.target.value === "cat readme.md") {
         if (curFol == "") {
@@ -153,8 +162,31 @@ const Commandline = () => {
           ]);
           setFormData("");
         }
+      } else if (e.target.value === "cd themes") {
+        if (curFol == "") {
+          setCurFol("/themes");
+          setIns((prevIns) => [
+            ...prevIns,
+            <FolderChange
+              curFol={curFol}
+              formData={formData}
+              key={uniqueKey}
+            />,
+          ]);
+          setFormData("");
+        } else {
+          setIns((prevIns) => [
+            ...prevIns,
+            <ErrorMessage
+              curFol={curFol}
+              formData={formData}
+              key={uniqueKey}
+            />,
+          ]);
+          setFormData("");
+        }
       } else if (e.target.value === "cd ..") {
-        if (curFol == "/projects") {
+        if (curFol == "/projects" || curFol == "/themes") {
           setIns((prevIns) => [
             ...prevIns,
             <FolderChange
@@ -203,6 +235,158 @@ const Commandline = () => {
           setIns((prevIns) => [
             ...prevIns,
             <IotTxt curFol={curFol} formData={formData} key={uniqueKey} />,
+          ]);
+          setFormData("");
+        } else {
+          setIns((prevIns) => [
+            ...prevIns,
+            <ErrorMessage
+              curFol={curFol}
+              formData={formData}
+              key={uniqueKey}
+            />,
+          ]);
+          setFormData("");
+        }
+      } else if (e.target.value === "cat themeguide.txt") {
+        if (curFol == "/themes") {
+          setIns((prevIns) => [
+            ...prevIns,
+            <ThemeGuideTxt
+              curFol={curFol}
+              formData={formData}
+              key={uniqueKey}
+            />,
+          ]);
+          setFormData("");
+        } else {
+          setIns((prevIns) => [
+            ...prevIns,
+            <ErrorMessage
+              curFol={curFol}
+              formData={formData}
+              key={uniqueKey}
+            />,
+          ]);
+          setFormData("");
+        }
+      } else if (e.target.value === "run codeinpurple") {
+        if (curFol == "/themes") {
+          theme("codeinpurple");
+          setIns((prevIns) => [
+            ...prevIns,
+            <ThemeChange
+              curFol={curFol}
+              formData={formData}
+              curTheme={
+                "You've unlocked CodeInPurple! Stylish, techy, and purple all the way. 💻💜"
+              }
+              key={uniqueKey}
+            />,
+          ]);
+          setFormData("");
+        } else {
+          setIns((prevIns) => [
+            ...prevIns,
+            <ErrorMessage
+              curFol={curFol}
+              formData={formData}
+              key={uniqueKey}
+            />,
+          ]);
+          setFormData("");
+        }
+      } else if (e.target.value === "run retailblues") {
+        if (curFol == "/themes") {
+          theme("retailblues");
+          setIns((prevIns) => [
+            ...prevIns,
+            <ThemeChange
+              curFol={curFol}
+              formData={formData}
+              curTheme={
+                "You've entered RetailBlues. Smooth, calming, and totally chic! 🛍️💙"
+              }
+              key={uniqueKey}
+            />,
+          ]);
+          setFormData("");
+        } else {
+          setIns((prevIns) => [
+            ...prevIns,
+            <ErrorMessage
+              curFol={curFol}
+              formData={formData}
+              key={uniqueKey}
+            />,
+          ]);
+          setFormData("");
+        }
+      } else if (e.target.value === "run morningglow") {
+        if (curFol == "/themes") {
+          theme("morningglow");
+          setIns((prevIns) => [
+            ...prevIns,
+            <ThemeChange
+              curFol={curFol}
+              formData={formData}
+              curTheme={
+                "Say hello to MorningGlow! Fresh, warm, and full of positive energy. 🌅🌞"
+              }
+              key={uniqueKey}
+            />,
+          ]);
+          setFormData("");
+        } else {
+          setIns((prevIns) => [
+            ...prevIns,
+            <ErrorMessage
+              curFol={curFol}
+              formData={formData}
+              key={uniqueKey}
+            />,
+          ]);
+          setFormData("");
+        }
+      } else if (e.target.value === "run spookydusk") {
+        if (curFol == "/themes") {
+          theme("spookydusk");
+          setIns((prevIns) => [
+            ...prevIns,
+            <ThemeChange
+              curFol={curFol}
+              formData={formData}
+              curTheme={
+                "Get ready for SpookyDusk! A little mystery, a little magic. 👻🌑"
+              }
+              key={uniqueKey}
+            />,
+          ]);
+          setFormData("");
+        } else {
+          setIns((prevIns) => [
+            ...prevIns,
+            <ErrorMessage
+              curFol={curFol}
+              formData={formData}
+              key={uniqueKey}
+            />,
+          ]);
+          setFormData("");
+        }
+      } else if (e.target.value === "run neonnights") {
+        if (curFol == "/themes") {
+          theme("neonnights");
+          setIns((prevIns) => [
+            ...prevIns,
+            <ThemeChange
+              curFol={curFol}
+              formData={formData}
+              curTheme={
+                "Welcome to NeonNights! It's all bright lights and cool vibes here. 🌙✨"
+              }
+              key={uniqueKey}
+            />,
           ]);
           setFormData("");
         } else {

@@ -14,6 +14,7 @@ function updateTime() {
 
 const Topbar = ({ title }) => {
   const [time, setTime] = useState("");
+  const [fullScreen, setFullScreen] = useState(true);
 
   useEffect(() => {
     setTime(updateTime());
@@ -25,15 +26,36 @@ const Topbar = ({ title }) => {
   }, []);
 
   function closeTab() {
-    if (window.close()) {
-      console.log("Tab closed");
-    } else {
-      alert(
-        "This tab cannot be closed programmatically. Please close it manually."
-      );
+    const userConfirmed = confirm(
+      "Are you sure you want to bounce? This site’s not done with you yet! 👋"
+    );
+
+    if (userConfirmed) {
+      window.close();
     }
   }
 
+  function toggleFullscreen(element) {
+    if (fullScreen) {
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+      } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+      }
+      setFullScreen(false);
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+      setFullScreen(true);
+    }
+  }
   return (
     <div className="flex justify-between items-center py-2 px-4 bg-topblack rounded-t-2xl border-b border-bordercolor text-xs md:text-base">
       <div className="flex gap-1 md:gap-2 items-center">
@@ -44,7 +66,10 @@ const Topbar = ({ title }) => {
           <X size={10} />
         </div>
 
-        <div className="bg-yellow-500 rounded-full p-1">
+        <div
+          className="bg-yellow-500 rounded-full p-1"
+          onClick={() => toggleFullscreen(document.documentElement)}
+        >
           <PictureInPicture size={10} />
         </div>
 
