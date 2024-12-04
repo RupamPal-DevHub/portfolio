@@ -8,7 +8,7 @@ const TerminalVersion = ({ curFol, formData }) => {
         <span className="text-white">$</span> &nbsp;
         <span className="text-white font-normal">{formData}</span>
       </p>
-      <p>1.04</p>
+      <p>1.4.5</p>
       <p>last updated on - 04/11/24</p>
     </div>
   );

@@ -92,7 +92,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="w-full flex flex-wrap justify-between mt-20 font-bold">
-          <p>last updated on 1 Jan 2025</p>
+          <p>last updated on 4 Dec 2024</p>
           <p>Made with ❤️ by Rupam Pal</p>
         </div>
       </div>

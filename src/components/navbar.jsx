@@ -1,11 +1,33 @@
 "use client";
+import { useState, useEffect, useRef, useContext } from "react";
+import { ThemeContext } from "@/app/layout";
+
 import { SquareTerminal } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const Navbar = ({ curPage }) => {
+  const { curTheme } = useContext(ThemeContext);
+  console.log(curTheme);
   const router = useRouter();
+
+  function nacColor() {
+    if (curTheme == "spookydusk") {
+      return "bg-orange-800";
+    } else if (curTheme == "neonnights") {
+      return "bg-navbar";
+    } else if (curTheme == "morningglow") {
+      return "bg-blue-700";
+    } else if (curTheme == "retailblues") {
+      return "bg-blue-800";
+    } else if (curTheme == "codeinpurple") {
+      return "bg-fuchsia-700";
+    }
+  }
+
   return (
-    <div className="bg-navbar w-full py-1 px-4 md:px-8 flex gap-3 md:gap-4 text-sm border-b border-bordercolor">
+    <div
+      className={`${nacColor()} w-ful py-1 px-4 md:px-8 flex gap-3 md:gap-4 text-sm border-b border-bordercolor`}
+    >
       <div
         className="font-bold hover:underline cursor-pointer flex items-center"
         onClick={() => router.push("/")}

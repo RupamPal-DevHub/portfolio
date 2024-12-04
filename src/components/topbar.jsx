@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { X, Minus, PictureInPicture } from "lucide-react";
+import { ThemeContext } from "@/app/layout";
 
 function updateTime() {
   const currentDate = new Date();
@@ -13,6 +14,7 @@ function updateTime() {
 }
 
 const Topbar = ({ title }) => {
+  const { toggleTheme, curTheme } = useContext(ThemeContext);
   const [time, setTime] = useState("");
   const [fullScreen, setFullScreen] = useState(true);
 
@@ -56,8 +58,25 @@ const Topbar = ({ title }) => {
       setFullScreen(true);
     }
   }
+
+  function nacColor() {
+    if (curTheme == "spookydusk") {
+      return "bg-orange-600";
+    } else if (curTheme == "neonnights") {
+      return "bg-topblack";
+    } else if (curTheme == "morningglow") {
+      return "bg-blue-500";
+    } else if (curTheme == "retailblues") {
+      return "bg-blue-600";
+    } else if (curTheme == "codeinpurple") {
+      return "bg-fuchsia-500";
+    }
+  }
+
   return (
-    <div className="flex justify-between items-center py-2 px-4 bg-topblack rounded-t-2xl border-b border-bordercolor text-xs md:text-base">
+    <div
+      className={`flex justify-between items-center py-2 px-4 ${nacColor()} rounded-t-2xl border-b border-bordercolor text-xs md:text-base`}
+    >
       <div className="flex gap-1 md:gap-2 items-center">
         <div
           className="bg-red-600 rounded-full p-1 cursor-pointer"

@@ -24,7 +24,7 @@ import { ThemeContext } from "@/app/layout";
 const Commandline = () => {
   const outputRef = useRef(null);
   const router = useRouter();
-  const theme = useContext(ThemeContext);
+  const { toggleTheme, curTheme } = useContext(ThemeContext);
 
   const [formData, setFormData] = useState("");
   const [ins, setIns] = useState([<Mario key={Date.now()} router={router} />]);
@@ -272,7 +272,7 @@ const Commandline = () => {
         }
       } else if (e.target.value === "run codeinpurple") {
         if (curFol == "/themes") {
-          theme("codeinpurple");
+          toggleTheme("codeinpurple");
           setIns((prevIns) => [
             ...prevIns,
             <ThemeChange
@@ -298,7 +298,7 @@ const Commandline = () => {
         }
       } else if (e.target.value === "run retailblues") {
         if (curFol == "/themes") {
-          theme("retailblues");
+          toggleTheme("retailblues");
           setIns((prevIns) => [
             ...prevIns,
             <ThemeChange
@@ -324,7 +324,7 @@ const Commandline = () => {
         }
       } else if (e.target.value === "run morningglow") {
         if (curFol == "/themes") {
-          theme("morningglow");
+          toggleTheme("morningglow");
           setIns((prevIns) => [
             ...prevIns,
             <ThemeChange
@@ -350,7 +350,7 @@ const Commandline = () => {
         }
       } else if (e.target.value === "run spookydusk") {
         if (curFol == "/themes") {
-          theme("spookydusk");
+          toggleTheme("spookydusk");
           setIns((prevIns) => [
             ...prevIns,
             <ThemeChange
@@ -376,7 +376,7 @@ const Commandline = () => {
         }
       } else if (e.target.value === "run neonnights") {
         if (curFol == "/themes") {
-          theme("neonnights");
+          toggleTheme("neonnights");
           setIns((prevIns) => [
             ...prevIns,
             <ThemeChange

@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="bg-black">
         <BackgroundVideo theme={curTheme} />
-        <ThemeContext.Provider value={toggleTheme}>
+        <ThemeContext.Provider value={{ toggleTheme, curTheme }}>
           {children}
         </ThemeContext.Provider>
       </body>
