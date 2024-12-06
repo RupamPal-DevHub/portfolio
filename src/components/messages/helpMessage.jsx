@@ -7,6 +7,7 @@ const HelpMessage = ({ curFol, formData }) => {
         rupam@terminal : ~{curFol}&nbsp;
         <span className="text-white">$</span>
         {"  "} &nbsp;
+        <span className="text-white font-normal ">{formData}</span>
       </p>
       <p className="text-orange-400">Available commands-</p>
       <div className="flex flex-wrap gap-x-6 gap-y-1">
