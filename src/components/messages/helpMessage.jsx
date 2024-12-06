@@ -4,8 +4,9 @@ const HelpMessage = ({ curFol, formData }) => {
   return (
     <div key="help" className="font-bold mb-2 text-sm md:text-sm lg:text-base">
       <p className="text-green-400 font-bold">
-        rupam@terminal : ~${"  "} &nbsp;{curFol}
-        <span className="text-white font-normal">{formData}</span>
+        rupam@terminal : ~{curFol}&nbsp;
+        <span className="text-white">$</span>
+        {"  "} &nbsp;
       </p>
       <p className="text-orange-400">Available commands-</p>
       <div className="flex flex-wrap gap-x-6 gap-y-1">

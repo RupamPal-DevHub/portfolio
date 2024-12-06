@@ -48,23 +48,23 @@ const Commandline = () => {
   }, []);
 
   function changeFormData(e) {
-    setFormData(e.target.value);
+    setFormData(e.target.value.toLowerCase().trim());
   }
 
   const submitCommand = (e) => {
-    const command = e.target.value.trim();
+    let command = e.target.value.toLowerCase().trim();
     const uniqueKey = `${command}-${Date.now()}`;
     if (e.key === "Enter") {
       e.preventDefault();
 
-      if (e.target.value === "--help" || e.target.value === "-h") {
+      if (command === "--help" || command === "-h") {
         setIns((prevIns) => [
           ...prevIns,
           <HelpMessage curFol={curFol} formData={formData} key={uniqueKey} />,
         ]);
-      } else if (e.target.value === "clear") {
+      } else if (command === "clear") {
         setIns([]);
-      } else if (e.target.value === "./weather" && weather) {
+      } else if (command === "./weather" && weather) {
         setIns((prevIns) => [
           ...prevIns,
           <WeatherMessage
@@ -74,11 +74,11 @@ const Commandline = () => {
             key={uniqueKey}
           />,
         ]);
-      } else if (e.target.value === "./portfolio") {
+      } else if (command === "./portfolio") {
         router.push("/portfolio");
-      } else if (e.target.value === "./contact") {
+      } else if (command === "./contact") {
         router.push("/contact");
-      } else if (e.target.value === "cat about.txt") {
+      } else if (command === "cat about.txt") {
         if (curFol == "") {
           setIns((prevIns) => [
             ...prevIns,
@@ -96,7 +96,7 @@ const Commandline = () => {
           ]);
           setFormData("");
         }
-      } else if (e.target.value === "ls") {
+      } else if (command === "ls") {
         if (curFol == "") {
           setIns((prevIns) => [
             ...prevIns,
@@ -120,7 +120,7 @@ const Commandline = () => {
           ]);
           setFormData("");
         }
-      } else if (e.target.value === "cat readme.md") {
+      } else if (command === "cat readme.md") {
         if (curFol == "") {
           setIns((prevIns) => [
             ...prevIns,
@@ -139,7 +139,7 @@ const Commandline = () => {
         }
 
         setFormData("");
-      } else if (e.target.value === "cd projects") {
+      } else if (command === "cd projects") {
         if (curFol == "") {
           setCurFol("/projects");
           setIns((prevIns) => [
@@ -162,7 +162,7 @@ const Commandline = () => {
           ]);
           setFormData("");
         }
-      } else if (e.target.value === "cd themes") {
+      } else if (command === "cd themes") {
         if (curFol == "") {
           setCurFol("/themes");
           setIns((prevIns) => [
@@ -185,7 +185,7 @@ const Commandline = () => {
           ]);
           setFormData("");
         }
-      } else if (e.target.value === "cd ..") {
+      } else if (command === "cd ..") {
         if (curFol == "/projects" || curFol == "/themes") {
           setIns((prevIns) => [
             ...prevIns,
@@ -208,7 +208,7 @@ const Commandline = () => {
           ]);
           setFormData("");
         }
-      } else if (e.target.value === "cat classcompass.txt") {
+      } else if (command === "cat classcompass.txt") {
         if (curFol == "/projects") {
           setIns((prevIns) => [
             ...prevIns,
@@ -230,7 +230,7 @@ const Commandline = () => {
           ]);
           setFormData("");
         }
-      } else if (e.target.value === "cat iot.txt") {
+      } else if (command === "cat iot.txt") {
         if (curFol == "/projects") {
           setIns((prevIns) => [
             ...prevIns,
@@ -248,7 +248,7 @@ const Commandline = () => {
           ]);
           setFormData("");
         }
-      } else if (e.target.value === "cat themeguide.txt") {
+      } else if (command === "cat themeguide.txt") {
         if (curFol == "/themes") {
           setIns((prevIns) => [
             ...prevIns,
@@ -270,7 +270,7 @@ const Commandline = () => {
           ]);
           setFormData("");
         }
-      } else if (e.target.value === "run codeinpurple") {
+      } else if (command === "run codeinpurple") {
         if (curFol == "/themes") {
           toggleTheme("codeinpurple");
           setIns((prevIns) => [
@@ -296,7 +296,7 @@ const Commandline = () => {
           ]);
           setFormData("");
         }
-      } else if (e.target.value === "run retailblues") {
+      } else if (command === "run retailblues") {
         if (curFol == "/themes") {
           toggleTheme("retailblues");
           setIns((prevIns) => [
@@ -322,7 +322,7 @@ const Commandline = () => {
           ]);
           setFormData("");
         }
-      } else if (e.target.value === "run morningglow") {
+      } else if (command === "run morningglow") {
         if (curFol == "/themes") {
           toggleTheme("morningglow");
           setIns((prevIns) => [
@@ -348,7 +348,7 @@ const Commandline = () => {
           ]);
           setFormData("");
         }
-      } else if (e.target.value === "run spookydusk") {
+      } else if (command === "run spookydusk") {
         if (curFol == "/themes") {
           toggleTheme("spookydusk");
           setIns((prevIns) => [
@@ -374,7 +374,7 @@ const Commandline = () => {
           ]);
           setFormData("");
         }
-      } else if (e.target.value === "run neonnights") {
+      } else if (command === "run neonnights") {
         if (curFol == "/themes") {
           toggleTheme("neonnights");
           setIns((prevIns) => [
@@ -400,7 +400,7 @@ const Commandline = () => {
           ]);
           setFormData("");
         }
-      } else if (e.target.value === "terminal -v") {
+      } else if (command === "terminal -v") {
         setIns((prevIns) => [
           ...prevIns,
           <TerminalVersion
@@ -409,7 +409,7 @@ const Commandline = () => {
             key={uniqueKey}
           />,
         ]);
-      } else if (e.target.value === "cat terminal.txt") {
+      } else if (command === "cat terminal.txt") {
         if (curFol == "/projects") {
           setIns((prevIns) => [
             ...prevIns,
@@ -427,7 +427,7 @@ const Commandline = () => {
           ]);
           setFormData("");
         }
-      } else if (e.target.value === "wget cv") {
+      } else if (command === "wget cv") {
         setIns((prevIns) => [
           ...prevIns,
           <DownloadCv curFol={curFol} formData={formData} key={uniqueKey} />,
